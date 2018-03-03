@@ -22,7 +22,7 @@ public class Crypto_Analyzer {
     public static void main(String[] args) throws IOException {
         String cryptos[] = {"bitcoin","ethereum","ripple","litecoin","dogecoin"};
         double crypto_val[] = new double[cryptos.length];
-        DecimalFormat cash = new DecimalFormat("$#,###,##0.00#### CAD");
+        DecimalFormat cash = new DecimalFormat("$#,###,##0.00####");
         URL url = new URL("https://coinmarketcap.com/currencies/bitcoin/");
         URLConnection urlConn = url.openConnection();
         InputStreamReader inStream = new InputStreamReader(urlConn.getInputStream());
@@ -72,7 +72,7 @@ public class Crypto_Analyzer {
         
         
         for(int i = 0; i < cryptos.length; i++){
-            System.out.println(cryptos[i] + ": " + crypto_val[i] * USD_to_CAD);
+            System.out.println(cryptos[i] + ": " + crypto_val[i] * USD_to_CAD + " CAD");
         }
         
     }
