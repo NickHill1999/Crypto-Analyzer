@@ -1,25 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package crypto.analyzer;
 
 import java.net.URL;
 import java.net.URLConnection;
 import java.io.*;
 import java.text.DecimalFormat;
-/**
- *
- * @author Nikhil
- */
 
 public class Crypto_Analyzer {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
         String cryptos[] = {"bitcoin","ethereum","ripple","litecoin","dogecoin"};
         double crypto_val[] = new double[cryptos.length];
         DecimalFormat cash = new DecimalFormat("$#,###,##0.00####");
@@ -31,6 +19,8 @@ public class Crypto_Analyzer {
         double price = 0;
         int start = 0;
         int end = 0;
+        
+        double coffeePrice = 5.00;
         
         //finding crypto values
         for(int i = 0; i < cryptos.length; i++){
@@ -50,8 +40,7 @@ public class Crypto_Analyzer {
             }
             crypto_val[i] = price;
         }
-        
-        //class='uccResultAmount
+
         url = new URL("http://www.xe.com/currencyconverter/convert/?Amount=1&From=USD&To=CAD");
         urlConn = url.openConnection();
         inStream = new InputStreamReader(urlConn.getInputStream());
@@ -68,12 +57,15 @@ public class Crypto_Analyzer {
         }
         
         double USD_to_CAD = price;
-        System.out.println(USD_to_CAD);
         
-        
+        PrintWriter writer = new PrintWriter("File.txt", "UTF-8");
+
         for(int i = 0; i < cryptos.length; i++){
-            System.out.println(cryptos[i] + ": " + crypto_val[i] * USD_to_CAD + " CAD");
+            writer.println(cryptos[i] + ": " + crypto_val[i] * USD_to_CAD + " CAD");
+            writer.println("Coffee: " + coffeePrice/(crypto_val[i] * USD_to_CAD) + " " + cryptos[i]);
         }
+        writer.close();
         
     }
+    
 }
